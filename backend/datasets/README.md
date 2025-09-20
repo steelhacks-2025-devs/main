@@ -2,6 +2,6 @@
 
 Sources and the datasets from them:
 - **Western Pennsylvania Regional Data Center**
-    - `Pittsburgh_City_Facilities.csv`
-    - `Pittsburgh_Neighborhoods.csv`
+    - `Pittsburgh_City_Facilities.csv` (https://data.wprdc.org/dataset/city-of-pittsburgh-facilities/resource/fbb50b02-2879-47cd-abea-ae697ec05170)
+    - `Pittsburgh_Neighborhoods.csv` (https://data.wprdc.org/dataset/neighborhoods2/resource/668d7238-cfd2-492e-b397-51a6e74182ff)
     - `wprdc_arrestdata_pittsburgh_apr2025.csv` sourced from [Western Pennsylvania Regional Data Center](https://data.wprdc.org/dataset/arrest-data/resource/e03a89dd-134a-4ee8-a2bd-62c40aeebc6f)
