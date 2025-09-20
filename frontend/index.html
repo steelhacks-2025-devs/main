@@ -58,9 +58,9 @@
         <div class="controls-group">
             <select id="neighborhood-list" name="neighborhood-list">
                 <option value="">Pick Your Neighborhood</option>
-                <option value="">Option 1</option>
-                <option value="">Option 2</option>
-                <option value="">Option 3</option>
+                {% for neighborhood in neighborhood_options %}
+                    <option value="{{ neighborhood }}">{{ neighborhood }}</option>
+                {% endfor %}
             </select>
             <button type="button">Pick For Me</button>
         </div>
