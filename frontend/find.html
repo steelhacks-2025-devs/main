@@ -1,37 +1,11 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Find Your Dream Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        h1 {
-            text-align: center;
-            margin-top: 2em;
-            margin-bottom: 2em;
-            font-size: 2.5em;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-left: 2em;
-            gap: 2em;
-        }
-        label {
-            margin-bottom: 0.5em;
-            font-size: 1.5em;
-        }
-        select {
-            font-size: 1.2em;
-            padding: 0.5em 1em;
-        }
-        button {
-            font-size: 1.2em;
-            padding: 0.6em 1.5em;
-            margin-top: 1.2em;
-        }
-    </style>
+    
+    <link href="./css/tailwind.css" rel="stylesheet">
 </head>
 <body>
     <h1>What Are You Looking For</h1>
@@ -62,5 +36,47 @@
         </div>
         <button type="submit">Find My Dream Home</button>
     </form>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find Your Dream Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/tailwind.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-white to-green-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white shadow-2xl rounded-2xl p-12 w-full max-w-xl">
+        <h1 class="text-center text-4xl font-extrabold text-blue-700 mb-10">What Are You Looking For</h1>
+        <form class="space-y-8">
+            <div>
+                <label for="price" class="block mb-3 text-xl font-semibold text-gray-800">Price Of Housing</label>
+                <select id="price" name="price" class="w-full text-lg px-5 py-3 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-blue-50">
+                    <option value="">Option 1</option>
+                    <option value="">Option 2</option>
+                    <option value="">Option 3</option>
+                </select>
+            </div>
+            <div>
+                <label for="walkability" class="block mb-3 text-xl font-semibold text-gray-800">Walkability</label>
+                <select id="walkability" name="walkability" class="w-full text-lg px-5 py-3 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-blue-50">
+                    <option value="">Option 1</option>
+                    <option value="">Option 2</option>
+                    <option value="">Option 3</option>
+                </select>
+            </div>
+            <div>
+                <label for="outdoor" class="block mb-3 text-xl font-semibold text-gray-800">Outdoor Opportunities</label>
+                <select id="outdoor" name="outdoor" class="w-full text-lg px-5 py-3 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-blue-50">
+                    <option value="">Option 1</option>
+                    <option value="">Option 2</option>
+                    <option value="">Option 3</option>
+                </select>
+            </div>
+            <button type="submit" class="w-full mt-8 text-2xl px-8 py-4 bg-gradient-to-r from-blue-500 to-green-400 text-white rounded-xl font-bold shadow-lg hover:from-blue-600 hover:to-green-500 transition">Find My Dream Home</button>
+        </form>
+    </div>
 </body>
 </html>
