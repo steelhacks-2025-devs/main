@@ -62,10 +62,11 @@
                     <option value="{{ neighborhood }}">{{ neighborhood }}</option>
                 {% endfor %}
             </select>
-            <button type="button">Pick For Me</button>
+            <button type="button" id="pick-for-me-button">Pick For Me</button>
         </div>
     </div>
     <main>
     </main>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

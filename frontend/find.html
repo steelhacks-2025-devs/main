@@ -1,51 +1,10 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Find Your Dream Home</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link href="./css/tailwind.css" rel="stylesheet">
-</head>
-<body>
-    <h1>What Are You Looking For</h1>
-    <form>
-        <div>
-            <label for="price">Price Of Housing:</label>
-            <select id="price" name="price">
-                <option value="">Option 1</option>
-                <option value="">Option 2</option>
-                <option value="">Option 3</option>
-            </select>
-        </div>
-        <div>
-            <label for="walkability">Walkability:</label>
-            <select id="walkability" name="walkability">
-                <option value="">Option 1</option>
-                <option value="">Option 2</option>
-                <option value="">Option 3</option>
-            </select>
-        </div>
-        <div>
-            <label for="outdoor">Outdoor Opportunities:</label>
-            <select id="outdoor" name="outdoor">
-                <option value="">Option 1</option>
-                <option value="">Option 2</option>
-                <option value="">Option 3</option>
-            </select>
-        </div>
-        <button type="submit">Find My Dream Home</button>
-    </form>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Find Your Dream Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./css/tailwind.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/tailwind.css') }}" rel="stylesheet">
 </head>
 <body class="bg-gradient-to-br from-blue-100 via-white to-green-100 min-h-screen flex items-center justify-center">
     <div class="bg-white shadow-2xl rounded-2xl p-12 w-full max-w-xl">
