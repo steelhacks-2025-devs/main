@@ -4,7 +4,11 @@ module.exports = {
     "./frontend/**/*.html",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+      }
+    },
   },
   plugins: [],
 }

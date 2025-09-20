@@ -1,81 +1,72 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Find Your Dream Home</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link href="./css/tailwind.css" rel="stylesheet">
-</head>
-<body>
-    <h1>What Are You Looking For</h1>
-    <form>
-        <div>
-            <label for="price">Price Of Housing:</label>
-            <select id="price" name="price">
-                <option value="">Option 1</option>
-                <option value="">Option 2</option>
-                <option value="">Option 3</option>
-            </select>
-        </div>
-        <div>
-            <label for="walkability">Walkability:</label>
-            <select id="walkability" name="walkability">
-                <option value="">Option 1</option>
-                <option value="">Option 2</option>
-                <option value="">Option 3</option>
-            </select>
-        </div>
-        <div>
-            <label for="outdoor">Outdoor Opportunities:</label>
-            <select id="outdoor" name="outdoor">
-                <option value="">Option 1</option>
-                <option value="">Option 2</option>
-                <option value="">Option 3</option>
-            </select>
-        </div>
-        <button type="submit">Find My Dream Home</button>
-    </form>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Find Your Dream Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./css/tailwind.css" rel="stylesheet">
+    <style>
+        h1{
+            font-size: 200%;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #1488cc;
+            background: -webkit-linear-gradient(to right, #1488cc, #2b32b2); 
+            background: linear-gradient(to right, #1488cc, #2b32b2); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #EFEFD7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align:center;
+            margin: 0;
+        }
+        h1, .price, .walkability, .outdoor {
+            font-family: "Roboto", sans-serif;
+        }
+        survey-container{
+            max-width: 500px;
+        }
+        form > div{
+            margin-bottom: 1.5rem;
+        }
+        label{
+            font-size: 1.25rem;
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-blue-100 via-white to-green-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white shadow-2xl rounded-2xl p-12 w-full max-w-xl">
-        <h1 class="text-center text-4xl font-extrabold text-blue-700 mb-10">What Are You Looking For</h1>
-        <form class="space-y-8">
+<body>
+    <div class = "survey-container">
+        <h1>Tell Us What You Are Looking For</h1>
+        <form>
             <div>
-                <label for="price" class="block mb-3 text-xl font-semibold text-gray-800">Price Of Housing</label>
-                <select id="price" name="price" class="w-full text-lg px-5 py-3 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-blue-50">
+                <label for="price">Price Of Housing</label>
+                <select id="price" name="price">
                     <option value="">Option 1</option>
                     <option value="">Option 2</option>
                     <option value="">Option 3</option>
                 </select>
             </div>
             <div>
-                <label for="walkability" class="block mb-3 text-xl font-semibold text-gray-800">Walkability</label>
-                <select id="walkability" name="walkability" class="w-full text-lg px-5 py-3 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-blue-50">
+                <label for="walkability">Walkability</label>
+                <select id="walkability" name="walkability">
                     <option value="">Option 1</option>
                     <option value="">Option 2</option>
                     <option value="">Option 3</option>
                 </select>
             </div>
             <div>
-                <label for="outdoor" class="block mb-3 text-xl font-semibold text-gray-800">Outdoor Opportunities</label>
-                <select id="outdoor" name="outdoor" class="w-full text-lg px-5 py-3 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-blue-50">
+                <label for="outdoor">Outdoor Opportunities</label>
+                <select id="outdoor" name="outdoor">
                     <option value="">Option 1</option>
                     <option value="">Option 2</option>
                     <option value="">Option 3</option>
                 </select>
             </div>
-            <button type="submit" class="w-full mt-8 text-2xl px-8 py-4 bg-gradient-to-r from-blue-500 to-green-400 text-white rounded-xl font-bold shadow-lg hover:from-blue-600 hover:to-green-500 transition">Find My Dream Home</button>
+            <button type="submit">Find My Dream Home</button>
         </form>
     </div>
 </body>
