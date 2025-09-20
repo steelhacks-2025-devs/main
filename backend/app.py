@@ -4,7 +4,7 @@ import os
 import pandas as pd
 
 # init flask
-app = Flask(__name__, template_folder='../frontend')
+app = Flask(__name__, template_folder='../frontend', static_folder='../frontend/static')
 
 @app.route('/')
 def home():
