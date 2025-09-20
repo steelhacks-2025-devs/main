@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
+
     const pickForMeButton = document.getElementById('pick-for-me-button');
     const findMyHomeButton = document.getElementById('find-my-home-button');
 
@@ -15,3 +15,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
