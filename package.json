@@ -24,7 +24,8 @@
     "update-browserslist-db": "^1.1.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i ./frontend/static/css/input.css -o ./frontend/static/css/tailwind.css --minify"
   },
   "keywords": [],
   "author": "",
