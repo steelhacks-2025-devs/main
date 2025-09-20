@@ -20,6 +20,14 @@ def home():
 
     return render_template('index.html', neighborhood_options=neighborhoods)
 
+@app.route('/find')
+def find():
+    return render_template('find.html')
+
+@app.route('/results')
+def results():
+    return render_template('results.html')
+
 # Run the Flask server
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
