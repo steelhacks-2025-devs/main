@@ -2,25 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SteelHacks Project</title>
+    <title>Good Ole' Days</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .center-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .title-group {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .title-group h1 {
+            font-size: 4rem;
+        }
+        .title-group h3 {
+            font-size: 2rem;
+        }
+        .controls-group {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 1.5em;
+        }
+        select {
+            font-size: 1.5rem;
+            padding: 0.4em 0.8em;
+        }
+        button {
+            font-size: 1.5rem;
+            padding: 0.4em 1.5em;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Good Ole' Days</h1>
-        <h3>Live your old days the best way!</h3>
-        <div>
-            <select id="decade" name="decade">
+    <div class="center-container">
+        <div class="title-group">
+            <h1>Good Ole' Days</h1>
+            <h3>Live your old days the best way!</h3>
+        </div>
+        <div class="controls-group">
+            <select id="neighborhood-list" name="neighborhood-list">
                 <option value="">Pick Your Neighborhood</option>
                 <option value="">Option 1</option>
                 <option value="">Option 2</option>
                 <option value="">Option 3</option>
             </select>
-        </div>
-        <div>
             <button type="button">Pick For Me</button>
         </div>
-    </header>
+    </div>
     <main>
     </main>
 </body>
