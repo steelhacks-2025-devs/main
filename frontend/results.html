@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <title>Best Places</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
     <style>
+        html, body{
+            height: 100%;
+            margin:0;
+            padding:0;
+            color: #efefd7;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
+            background: -webkit-linear-gradient(to right, #F7BB97, #DD5E89);
+            background: linear-gradient(to right, #F7BB97, #DD5E89);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
         }
         h1 {
             text-align: center;
@@ -20,14 +32,15 @@
             flex-direction: column;
             align-items: flex-start;
             gap: 2em;
-            margin-left: 2em;
+            margin-left: 5em;
             margin-top: 3em;
+            color:rgb(12, 1, 1);
         }
         .house-box {
             max-width: 200px;
             width: 100%;
             min-height: 100px;
-            background: #f2f2f2;
+            background: #efefd7;
             border: 2px solid #ccc;
             border-radius: 12px;
             display: flex;
@@ -35,15 +48,18 @@
             justify-content: center;
             font-size: 2rem;
             font-weight: bold;
+            margin-bottom: 1.5rem;
         }
     </style>
 </head>
 <body>
     <h1>Best Places</h1>
     <div class="boxes-container">
-        <div class="house-box">House 1</div>
-        <div class="house-box">House 2</div>
-        <div class="house-box">House 3</div>
+        <div class="left">
+            <div class="house-box">House 1</div>
+            <div class="house-box">House 2</div>
+            <div class="house-box">House 3</div>
+        </div>
     </div>
 </body>
 </html>
