@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find Your Dream Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1 {
+            text-align: center;
+            margin-top: 2em;
+            margin-bottom: 2em;
+            font-size: 2.5em;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-left: 2em;
+            gap: 2em;
+        }
+        label {
+            margin-bottom: 0.5em;
+            font-size: 1.5em;
+        }
+        select {
+            font-size: 1.2em;
+            padding: 0.5em 1em;
+        }
+        button {
+            font-size: 1.2em;
+            padding: 0.6em 1.5em;
+            margin-top: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>What Are You Looking For</h1>
+    <form>
+        <div>
+            <label for="price">Price Of Housing:</label>
+            <select id="price" name="price">
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+                <option value="">Option 3</option>
+            </select>
+        </div>
+        <div>
+            <label for="walkability">Walkability:</label>
+            <select id="walkability" name="walkability">
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+                <option value="">Option 3</option>
+            </select>
+        </div>
+        <div>
+            <label for="outdoor">Outdoor Opportunities:</label>
+            <select id="outdoor" name="outdoor">
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+                <option value="">Option 3</option>
+            </select>
+        </div>
+        <button type="submit">Find My Dream Home</button>
+    </form>
+</body>
+</html>
