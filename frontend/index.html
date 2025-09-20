@@ -4,26 +4,28 @@
     <meta charset="UTF-8">
     <title>Good Ole' Days</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href = "css/styles.css">
+    <link href="{{ url_for('static', filename='css/tailwind.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div class="center-container">
-        <div class="title-group">
-            <h1>Good Ole' Days</h1>
-            <h3>Live your old days the best way!</h3>
+<!-- <body class="bg-gray-100 h-screen flex items-center justify-center"> -->
+<body class="h-screen flex items-center justify-center" style="background: #dd5e89; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #dd5e89, #f7bb97); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #dd5e89, #f7bb97); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */">
+    <div class="bg-white p-8 rounded shadow-md text-center">
+        <div class="title-group mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">Good Ole' Days</h1>
+            <h3 class="text-xl text-gray-600">Live your old days the best way!</h3>
         </div>
-        <div class="controls-group">
-            <select id="neighborhood-list" name="neighborhood-list">
+        <div class="controls-group flex flex-col items-center space-y-4">
+            <select id="neighborhood-list" name="neighborhood-list" class="px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 <option value="">Pick Your Neighborhood</option>
                 {% for neighborhood in neighborhood_options %}
                     <option value="{{ neighborhood }}">{{ neighborhood }}</option>
                 {% endfor %}
             </select>
-            <button type="button" id="pick-for-me-button">Pick For Me</button>
+            <button type="button" id="pick-for-me-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pick For Me</button>
+            <button type="button" id="find-my-home-button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Find My Home</button>
         </div>
     </div>
-    <main>
-    </main>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
