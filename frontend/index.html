@@ -7,8 +7,10 @@
     <link href="{{ url_for('static', filename='css/tailwind.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        html, body {
             font-family: 'Nunito', sans-serif;
+            height: 100%;
+            margin:0;
         }
     </style>
 </head>
@@ -39,11 +41,12 @@
                 Find My Home
             </button>
         </div>
-        <p class="mt-4 text-gray-600">If You Don't Have A Preferred Neighborhood:</p>
-        <div class="flex justify-center">
-            <button type="button" id="pick-for-me-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Pick For Me</button>
+        <p class="mt-8 text-gray-700 font-medium">If You Don't Have A Preferred Neighborhood:</p>
+        <div class="flex justify-center mt-4">
+            <button type="button" id="pick-for-me-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded mt-4">Pick For Me</button>
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
 </body>
 </html>
