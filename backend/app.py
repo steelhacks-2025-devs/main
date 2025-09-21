@@ -30,8 +30,12 @@ def results():
     # Read PGH properties into a DataFrame
     df = pd.read_csv(property_csv)
 
+    # Get csv file paths
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    output_file = os.path.join(BASE_DIR, 'datasets', 'found.json')
+
     # Get data within price range
-    print(df[(df['FAIRMARKETTOTAL'] >= min_price) & (df['FAIRMARKETTOTAL'] < max_price)]['FAIRMARKETTOTAL'])
+    df[(df['FAIRMARKETTOTAL'] >= min_price) & (df['FAIRMARKETTOTAL'] < max_price)].to_json(output_file)
     
     return render_template('results.html', price_range_chosen=f'${min_price:,} - ${max_price:,}')
 
