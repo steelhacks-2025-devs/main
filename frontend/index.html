@@ -11,8 +11,7 @@
             font-family: 'Nunito', sans-serif;
             height: 100%;
             margin:0;
-        }
-        
+        }        
     </style>
 </head>
 <body class="h-screen flex items-center justify-center" style="background: #dd5e89;
@@ -31,10 +30,11 @@
         <div>
             <form action="/results" method="post" class="controls-group flex items-center justify-center">
                 <select id="neighborhood-list" name="neighborhood-list" class="px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 mr-4">
-                    <option value="">Pick Your Neighborhood</option>
-                    {% for neighborhood in neighborhood_options %}
-                        <option value="{{ neighborhood }}">{{ neighborhood }}</option>
-                    {% endfor %}
+                    <option value="">Price Range</option>
+                    <option value="0-100">$100K Or Less</option>
+                    <option value="100-250">$100K-$250K</option>
+                    <option value="250-500">$250K-$500K</option>
+                    <option value="500+">$500K Or More</option>
                 </select>
                 <button type="submit" id="find-my-home-button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex items-center gap-2">
                     <svg class ="w-5 h-5" fill = "none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -44,9 +44,9 @@
                 </button>
             </form>
         </div>
-        <p class="mt-8 text-gray-700 font-medium mb-1">If You Don't Have A Preferred Neighborhood:</p>
+        <p class="mt-8 text-gray-700 font-medium mb-1">List More Preferences Here:</p>
         <div class="flex justify-center mt-1">
-            <button type="button" id="pick-for-me-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded mt-2">Pick For Me</button>
+            <button type="button" id="pick-for-me-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded mt-2">More Options</button>
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
