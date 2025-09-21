@@ -39,14 +39,18 @@
             const boxesContainer = document.querySelector('.boxes-container .left');
             const propertyAddresses = data.PROPERTYADDRESS;
             const fairMarketTotals = data.FAIRMARKETTOTAL;
-            const addressKeys = Object.keys(propertyAddresses).slice(0, 10); // Get the first 10 keys
+            const livabilityScores = data.livability_score;
+            const addressKeys = Object.keys(propertyAddresses); // Get all the keys (only 10 left from Python)
             const infoBox = document.getElementById('infoBox');
             const selectedKeyElement = document.getElementById('selectedKey');
             const mapIframe = document.getElementById('mapIframe');
 
+            addressKeys.sort((a,b) => livabilityScores[b] - livabilityScores[a]); // Sort keys by livability score
+
             addressKeys.forEach(key => {
                 const address = propertyAddresses[key];
                 const fairMarketTotal = fairMarketTotals[key];
+                const livabilityScore = livabilityScores[key];
 
                 const houseBox = document.createElement('button');
                 houseBox.classList.add('house-box', 'w-[300px]', 'min-h-[100px]', 'bg-[#efefd7]', 'border-2', 'border-[#ccc]', 'rounded-xl', 'flex', 'flex-col', 'items-center', 'justify-center', 'text-2xl', 'font-bold', 'mb-6', 'hover:bg-gray-200');
@@ -67,7 +71,7 @@
                     padding: 0.5rem 1rem;
                     cursor: pointer;
                 `;
-                houseBox.innerHTML = `<p>${address}</p><p>Price: $${fairMarketTotal}</p>`;
+                houseBox.innerHTML = `<p>${address}</p><p>Price: $${fairMarketTotal} | ${livabilityScore.toFixed(1)}</p>`;
                 houseBox.id = key;
 
                 houseBox.addEventListener('click', function() {
