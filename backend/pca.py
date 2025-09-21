@@ -26,7 +26,26 @@ df['CONDITION'] = df['CONDITION'].map(scale_mapping)
 df['CONDITION_FLIPPED'] = -df['CONDITION']
 df['STORIES_FLIPPED'] = -df['STORIES']
 
-X = df[['STORIES_FLIPPED', 'CONDITION_FLIPPED', 'TOTALROOMS', 'FINISHEDLIVINGAREA']]
+# Bell curve score for price, median homes are ranked higher as a sweet spot for affordability and quality
+target_price = df['FAIRMARKETTOTAL'].median()
+print(f"median FMV price: {target_price}")
+price_distance = abs(df['FAIRMARKETTOTAL'] - target_price)
+max_distance = price_distance.max()
+
+# Convert to score where closer to median = higher score
+df['price_bell_score'] = 1 - (price_distance / max_distance)
+
+# # Bell curve score for home size, seniors want a comfortable but not overly large home
+# target_price = df['FINISHEDLIVINGAREA'].median()
+# print(f"median FMV price: {target_price}")
+# price_distance = abs(df['FINISHEDLIVINGAREA'] - target_price)
+# max_distance = price_distance.max()
+
+# # Convert to score where closer to median = higher score
+# df['house_size_bell_score'] = 1 - (price_distance / max_distance)
+
+
+X = df[['STORIES_FLIPPED', 'CONDITION_FLIPPED', 'price_bell_score', "FINISHEDLIVINGAREA"]]
 
 def pca_scoring(df):# Load the dataset
     # Standardize features
@@ -46,5 +65,5 @@ def pca_scoring(df):# Load the dataset
     df['livability_score'] = minmaxscaler.fit_transform(df['livability_score'].values.reshape(-1, 1)).flatten()
     # Rank the data from best to worst
     return df.sort_values(by='livability_score', ascending=False)
-
+pd.set_option('display.max_columns', None)
 print(pca_scoring(X))
