@@ -80,7 +80,7 @@ Our proximity scoring algorithm uses **inverse distance weighting**, where close
 
 $\text{proximity_weights} = \sum_{i=1}^{n} \frac{1}{1 + d_i}$
 
-> where $d_i$ is the distance in miles to amenity $i$.
+where $d_i$ is the distance in miles to amenity $i$.
 
 The final proximity score combines both quantity and proximity:
 
@@ -108,7 +108,7 @@ The PCA process:
 
 $\text{PCA_score} = \mathbf{w}^T \mathbf{x}$
 
->where $\mathbf{w}$ is the principal component vector and $\mathbf{x}$ is the standardized feature vector.
+where $\mathbf{w}$ is the principal component vector and $\mathbf{x}$ is the standardized feature vector.
 
 This approach automatically determines the optimal weighting of each feature based on how they vary together in the dataset, creating a single score that captures the most important patterns in senior-friendly housing characteristics.
 
