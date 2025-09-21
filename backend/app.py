@@ -18,8 +18,10 @@ def find():
 
 @app.route('/results', methods=['POST'])
 def results():
-    # Get price range selected by user on index page
-    price_range = request.form.get('price-range')
+    # Get criteria selected by user on index page
+    min_price = int(request.form.get('min_price'))
+    max_price = int(request.form.get('max_price'))
+    
 
     # Get csv file path
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -28,17 +30,10 @@ def results():
     # Read PGH properties into a DataFrame
     df = pd.read_csv(property_csv)
 
-    # Price conditionals based on dropdown choice
-    if (price_range == '0-100'):
-        print(df[df['FAIRMARKETTOTAL'] < 100_000]['FAIRMARKETTOTAL'])
-    elif (price_range == '100-250'):
-        print(df[(df['FAIRMARKETTOTAL'] >= 100_000) & (df['FAIRMARKETTOTAL'] < 250_000)]['FAIRMARKETTOTAL'])
-    elif (price_range == '250-500'):
-        print(df[(df['FAIRMARKETTOTAL'] >= 250_000) & (df['FAIRMARKETTOTAL'] < 500_000)]['FAIRMARKETTOTAL'])
-    elif (price_range == '500+'):
-        print(df[df['FAIRMARKETTOTAL'] >= 500_000]['FAIRMARKETTOTAL'])
+    # Get data within price range
+    print(df[(df['FAIRMARKETTOTAL'] >= min_price) & (df['FAIRMARKETTOTAL'] < max_price)]['FAIRMARKETTOTAL'])
     
-    return render_template('results.html', price_range_chosen=price_range)
+    return render_template('results.html', price_range_chosen=f'${min_price:,} - ${max_price:,}')
 
 # Run the Flask server
 if __name__ == '__main__':
