@@ -10,7 +10,7 @@ We used open source datasets and Python's data science and ML libraries to creat
 
 ## The Team
 
-Our team consisted of [Bhavana](https://github.com/bhavana-pixel), [Danny](https://github.com/dannylawler), [Joe](https://github.com/joe-magg), and [Shane](https://github.com/shane-thoma). Bhavana and Danny were the main frontend developers for the project, working to perfect the user experience for our target audience. Joe and Shane were the main backend developers for the project, using machine learning to determine the best places to recommend.
+Our team consisted of [Bhavana](https://github.com/bhavana-pixel), [Danny](https://github.com/dannylawler), [Joe](https://github.com/joe-magg), and [Shane](https://github.com/shane-thoma). Bhavana and Danny were the main frontend developers for the project, and Joe and Shane were the main backend developers.
 
 ## How it Works
 
