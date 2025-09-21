@@ -11,6 +11,7 @@ Sources and the datasets from them:
     - `property-assessments-3.csv`
     - `property-assessments-4.csv`
 
+Zip Code Centroid coordinates for proximity calculations: https://hudgis-hud.opendata.arcgis.com/datasets/zip-code-population-weighted-centroids-1/
 
 Output Data:
 - `output_categorized_data.pkl` - Clustered / Categorized main data

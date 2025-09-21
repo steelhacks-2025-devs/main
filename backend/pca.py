@@ -5,8 +5,9 @@ import pandas as pd
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-csv_file = os.path.join(BASE_DIR, 'datasets', 'finalpt5.csv')
+csv_file = os.path.join(BASE_DIR, 'datasets', 'finalpt6.csv')
 df = pd.read_csv(csv_file)
+
 df = df.set_index('PROPERTYADDRESS')
 
 # condition : rank (1, 7, 2, 3, 4, 5, 8, 6 is conditions from best to worst)
@@ -26,8 +27,6 @@ df['CONDITION_FLIPPED'] = -df['CONDITION']
 df['STORIES_FLIPPED'] = -df['STORIES']
 
 X = df[['STORIES_FLIPPED', 'CONDITION_FLIPPED', 'TOTALROOMS', 'FINISHEDLIVINGAREA']]
-
-
 
 def pca_scoring(df):# Load the dataset
     # Standardize features
