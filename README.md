@@ -78,13 +78,13 @@ For each zipcode centroid, we query four categories of amenities within a 5-mile
 
 Our proximity scoring algorithm uses **inverse distance weighting**, where closer amenities contribute more heavily to the overall proximity score:
 
-$$ `\text{proximity_weights} = \sum_{i=1}^{n} \frac{1}{1 + d_i}` $$ 
+$$`\text{proximity_weights} = \sum_{i=1}^{n} \frac{1}{1 + d_i}`$$ 
 
-where $d_i$ is the distance in miles to amenity $i$.
+where $`d_i`$ is the distance in miles to amenity $`i`$.
 
 The final proximity score combines both quantity and proximity:
 
-$$ `\text{proximity_score} = \min(100, \tanh(\frac{\text{proximity_weights}}{30}) \times 35 + \tanh(\frac{\text{count}}{30}) \times 65)` $$
+$$`\text{proximity_score} = \min(100, \tanh(\frac{\text{proximity_weights}}{30}) \times 35 + \tanh(\frac{\text{count}}{30}) \times 65)`$$
 
 The `tanh` function provides natural diminishing returns, preventing a few very close amenities from dominating the score.
 
@@ -108,7 +108,7 @@ The PCA process:
 
 The PCA Score is calculated as follows:
 
-$$ \text{PCA_score} = \mathbf{w}^T \mathbf{x} $$
+$$`\text{PCA_score} = \mathbf{w}^T \mathbf{x}`$$
 
 where $`\mathbf{w}`$ is the principal component vector and `$\mathbf{x}$` is the standardized feature vector.
 
