@@ -122,7 +122,7 @@
             <h1 class="text-4xl font-bold text-gray-800">Tell Us What You Are Looking For</h1>
             <h3 class="text-xl text-gray-600">Find your dream home today!</h3>
         </div>
-        <div class="controls-group flex flex-col items-center space-y-4">
+        <form action="/results" class="controls-group flex flex-col items-center space-y-4">
             <div class="w-full">
                 <label for="min-price" class="block text-gray-700 text-sm font-bold mb-2">Min Price:</label>
                 <input type="range" id="min-price" name="min_price" min="0" max="3000000" value="0" class="w-full">
@@ -173,8 +173,8 @@
                 </svg>
                 Find My Home
             </button>
-            <button id="back-button" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Back</button>
-        </div>
+            <button id="back-button" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Back</button>
+        </form>
     </div>
     <script>
         const minPriceInput = document.getElementById('min-price');

@@ -36,9 +36,9 @@ def results():
     # Get criteria selected by user on index page
     min_price = int(request.form.get('min_price'))
     max_price = int(request.form.get('max_price'))
-    stories = int(request.form.get('stories'))
-    bedrooms = str(request.form.get('bedrooms'))
-    condition = str(request.form.get('condition'))
+    stories = request.form.get('stories')
+    bedrooms = request.form.get('bedrooms')
+    condition = request.form.get('condition')
 
     # Get csv file path
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -55,11 +55,11 @@ def results():
     df = df[(df['FAIRMARKETTOTAL'] >= min_price) & (df['FAIRMARKETTOTAL'] < max_price)]
 
     # If user requested specific stories, match it
-    if stories != 'No preference':
-        df = df[df['STORIES'] == stories]
+    if stories and stories != 'No preference':
+        df = df[df['STORIES'] == int(stories)]
 
     # If user requested specific number of bedrooms match it
-    if bedrooms != 'No preference':
+    if bedrooms and bedrooms != 'No preference':
         if bedrooms == '10+':
             df = df[df['BEDROOMS'] >= 10]
         elif bedrooms == '7-9':
@@ -70,8 +70,8 @@ def results():
             df = df[df['BEDROOMS'] == int(bedrooms)]
 
     # If user requested specific condition, match it
-    if condition != 'No preference':
-        df = df[df['CONDITION'] == condition]
+    if condition and condition != 'No preference':
+        df = df[df['CONDITIONDESC'] == condition]
     
     # Convert final DataFrame to a json file
     df.to_json(output_file)
