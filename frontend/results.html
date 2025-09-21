@@ -1,65 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Best Places</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
-    <style>
-        html, body{
-            height: 100%;
-            margin:0;
-            padding:0;
-            color: #efefd7;
-        }
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: -webkit-linear-gradient(to right, #F7BB97, #DD5E89);
-            background: linear-gradient(to right, #F7BB97, #DD5E89);
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-        }
-        h1 {
-            text-align: center;
-            margin-top: 2em;
-            font-size: 3rem;
-        }
-        .boxes-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 2em;
-            margin-left: 5em;
-            margin-top: 3em;
-            color:rgb(12, 1, 1);
-        }
-        .house-box {
-            max-width: 200px;
-            width: 100%;
-            min-height: 100px;
-            background: #efefd7;
-            border: 2px solid #ccc;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-        }
-    </style>
+    <link href="{{ url_for('static', filename='css/tailwind.css') }}" rel="stylesheet">
 </head>
-<body>
-    <h1>Best Places</h1>
-    <div class="boxes-container">
-        <div class="left">
-            <div class="house-box">House 1</div>
-            <div class="house-box">House 2</div>
-            <div class="house-box">House 3</div>
+
+<body class="h-screen flex items-center justify-start" style="background: #dd5e89;
+  background: -webkit-linear-gradient(to right, #dd5e89, #f7bb97);
+  background: linear-gradient(to right, #dd5e89, #f7bb97);">
+    <div class="flex">
+        <div class="bg-white w-[450px] p-8 rounded shadow-md text-center ml-20 w-4/10">
+            <div class="title-group mb-8">
+                <h1 class="text-4xl font-bold text-gray-800">Best Places</h1>
+                <h3 class="text-xl text-gray-600">Here are some great places for you!</h3>
+            </div>
+            <div class="boxes-container flex items-center justify-center flex-col">
+                <div class="left">
+                    <div class="house-box w-[300px] min-h-[100px] bg-[#efefd7] border-2 border-[#ccc] rounded-xl flex items-center justify-center text-2xl font-bold mb-6">House 1</div>
+                    <div class="house-box w-[300px] min-h-[100px] bg-[#efefd7] border-2 border-[#ccc] rounded-xl flex items-center justify-center text-2xl font-bold mb-6">House 2</div>
+                    <div class="house-box w-[300px] min-h-[100px] bg-[#efefd7] border-2 border-[#ccc] rounded-xl flex items-center justify-center text-2xl font-bold mb-6">House 3</div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white w-[875px] p-8 rounded shadow-md text-center w-3/5 ml-8">
+            <div class="title-group mb-8">
+                <h1 class="text-4xl font-bold text-gray-800">Additional Information</h1>
+                <h3 class="text-xl text-gray-600">Details about the area</h3>
+            </div>
+            <p>This is some additional information about the selected area.</p>
         </div>
     </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
+
 </html>
