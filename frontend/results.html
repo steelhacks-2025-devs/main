@@ -47,14 +47,14 @@
             </div>
             <div id="propertyDataContainer">
                 <h3 class="text-2xl font-bold" style="margin-right: calc(250/400*100%); margin-top: -2%;">Property Data:</h3>
-                <div id="propertyInfo" style="margin-left: 16px; margin-top: 20px; font-size: 1.3em;">
-                    <p id="addressInfo"></p>
-                    <p id="priceInfo"></p>
-                    <p id="livabilityInfo"></p>
-                    <p id="bedroomInfo"></p>
-                    <p id="bathroomInfo"></p>
-                    <p id="storiesInfo"></p>
-                    <p id="conditionInfo"></p>
+                <div id="propertyInfo" style="margin-left: 6px; margin-top: 20px; font-size: 1.3em;">
+                    <p><span style="font-weight: bold;">Address:</span> <span id="addressInfo"></span></p>
+                    <p><span style="font-weight: bold;">Price:</span> <span id="priceInfo"></span></p>
+                    <p><span style="font-weight: bold;">Livability Score:</span> <span id="livabilityInfo"></span></p>
+                    <p><span style="font-weight: bold;">Bedrooms:</span> <span id="bedroomInfo"></span></p>
+                    <p><span style="font-weight: bold;">Bathrooms:</span> <span id="bathroomInfo"></span></p>
+                    <p><span style="font-weight: bold;">Stories:</span> <span id="storiesInfo"></span></p>
+                    <p><span style="font-weight: bold;">Condition:</span> <span id="conditionInfo"></span></p>
                 </div>
                 <iframe id="mapIframe" src="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
@@ -124,13 +124,13 @@
                     const mapUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3030.891878849978!2d-75.3139787!3d39.7929925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6d9d57043c99f%3A0x4694698992989f6a!2s${encodeURIComponent(address + ", Pittsburgh, PA")}!5e0!3m2!1sen!2sus!4v1727009769297!5m2!1sen!2sus`;
                     mapIframe.src = mapUrl;
 
-                    addressInfoElement.textContent = `Address: ${address}`;
-                    priceInfoElement.textContent = `Price: $${fairMarketTotal}`;
-                    livabilityInfoElement.textContent = `Livability Score: ${livabilityScore.toFixed(1)}`;
-                    bedroomInfoElement.textContent = `Bedrooms: ${bedroomCount}`;
-                    bathroomInfoElement.textContent = `Bathrooms: ${fullBathCount + halfBathCount}`;
-                    conditionInfoElement.textContent = `Condition: ${conditionDesc}`;
-                    storiesInfoElement.textContent = `Stories: ${storyCount}`;
+                    addressInfoElement.textContent = `${address}`;
+                    priceInfoElement.textContent = `$${fairMarketTotal}`;
+                    livabilityInfoElement.textContent = `${livabilityScore.toFixed(1)}`;
+                    bedroomInfoElement.textContent = `${bedroomCount}`;
+                    bathroomInfoElement.textContent = `${fullBathCount + halfBathCount}`;
+                    conditionInfoElement.textContent = `${conditionDesc}`;
+                    storiesInfoElement.textContent = `${storyCount}`;
                 });
 
                 boxesContainer.appendChild(houseBox);
