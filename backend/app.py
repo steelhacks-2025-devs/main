@@ -36,7 +36,9 @@ def results():
     # Get criteria selected by user on index page
     min_price = int(request.form.get('min_price'))
     max_price = int(request.form.get('max_price'))
-    
+    stories = int(request.form.get('stories'))
+    bedrooms = str(request.form.get('bedrooms'))
+    condition = str(request.form.get('condition'))
 
     # Get csv file path
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -50,7 +52,29 @@ def results():
     output_file = os.path.join(BASE_DIR, 'datasets', 'found.json')
 
     # Get data within price range
-    df[(df['FAIRMARKETTOTAL'] >= min_price) & (df['FAIRMARKETTOTAL'] < max_price)].to_json(output_file)
+    df = df[(df['FAIRMARKETTOTAL'] >= min_price) & (df['FAIRMARKETTOTAL'] < max_price)]
+
+    # If user requested specific stories, match it
+    if stories != 'No preference':
+        df = df[df['STORIES'] == stories]
+
+    # If user requested specific number of bedrooms match it
+    if bedrooms != 'No preference':
+        if bedrooms == '10+':
+            df = df[df['BEDROOMS'] >= 10]
+        elif bedrooms == '7-9':
+            df = df[(df['BEDROOMS'] >= 7) & (df['BEDROOMS'] <= 9)]
+        elif bedrooms == '5-6':
+            df = df[(df['BEDROOMS'] == 5) | (df['BEDROOMS'] == 6)]
+        else:
+            df = df[df['BEDROOMS'] == int(bedrooms)]
+
+    # If user requested specific condition, match it
+    if condition != 'No preference':
+        df = df[df['CONDITION'] == condition]
+    
+    # Convert final DataFrame to a json file
+    df.to_json(output_file)
     
     return render_template('results.html', price_range_chosen=f'${min_price:,} - ${max_price:,}')
 
