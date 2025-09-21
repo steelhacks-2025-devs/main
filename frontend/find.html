@@ -125,12 +125,12 @@
         <form action="/results" method="post" class="controls-group flex flex-col items-center space-y-4">
             <div class="w-full">
                 <label for="min-price" class="block text-gray-700 text-sm font-bold mb-2">Min Price:</label>
-                <input type="range" id="min-price" name="min_price" min="0" max="3000000" value="0" class="w-full">
+                <input type="range" step="10000" id="min-price" name="min_price" min="0" max="3000000" value="0" class="w-full">
                 <p class="text-gray-600 text-xs italic">Value: $<span id="min-price-value">0</span></p>
             </div>
             <div class="w-full">
                 <label for="max-price" class="block text-gray-700 text-sm font-bold mb-2">Max Price:</label>
-                <input type="range" id="max-price" name="max_price" min="0" max="3000000" value="3000000" class="w-full">
+                <input type="range" step="10000" id="max-price" name="max_price" min="0" max="3000000" value="3000000" class="w-full">
                 <p class="text-gray-600 text-xs italic">Value: $<span id="max-price-value">3000000</span></p>
             </div>
             <div class="w-full">
