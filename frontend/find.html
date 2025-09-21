@@ -122,7 +122,7 @@
             <h1 class="text-4xl font-bold text-gray-800">Tell Us What You Are Looking For</h1>
             <h3 class="text-xl text-gray-600">Find your dream home today!</h3>
         </div>
-        <form action="/results" class="controls-group flex flex-col items-center space-y-4">
+        <form action="/results" method="post" class="controls-group flex flex-col items-center space-y-4">
             <div class="w-full">
                 <label for="min-price" class="block text-gray-700 text-sm font-bold mb-2">Min Price:</label>
                 <input type="range" id="min-price" name="min_price" min="0" max="3000000" value="0" class="w-full">
@@ -136,44 +136,47 @@
             <div class="w-full">
                 <label for="bedrooms" class="block text-gray-700 text-sm font-bold mb-2">Bedrooms:</label>
                 <select id="bedrooms" name="bedrooms" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                    <option value="">4</option>
-                    <option value="">5-6</option>
-                    <option value="">7-9</option>
-                    <option value="">10+</option>
+                    <option value="">No preference</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5-6">5-6</option>
+                    <option value="7-9">7-9</option>
+                    <option value="10+">10+</option>
                 </select>
             </div>
             <div class="w-full">
                 <label for="condition" class="block text-gray-700 text-sm font-bold mb-2">Condition:</label>
                 <select id="condition" name="condition" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    <option value="">Excellent</option>
-                    <option value="">Very Good</option>
-                    <option value="">Good</option>
-                    <option value="">Average</option>
-                    <option value="">Fair</option>
-                    <option value="">Poor</option>
-                    <option value="">Very Poor</option>
-                    <option value="">Unsound</option>
+                    <option value="">No preference</option>
+                    <option value="EXCELLENT">Excellent</option>
+                    <option value="VERY GOOD">Very Good</option>
+                    <option value="GOOD">Good</option>
+                    <option value="AVERAGE">Average</option>
+                    <option value="FAIR">Fair</option>
+                    <option value="POOR">Poor</option>
+                    <option value="VERY POOR">Very Poor</option>
+                    <option value="UNSOUND">Unsound</option>
                 </select>
             </div>
             <div class="w-full">
                 <label for="floors" class="block text-gray-700 text-sm font-bold mb-2">Floors:</label>
                 <select id="floors" name="floors" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                    <option value="">4</option>
+                    <option value="">No preference</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
                 </select>
             </div>
-            <button id="find-my-home-button-2" type="button" class="find-my-home-button bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex items-center gap-2">
+            <button id="find-my-home-button-2" type="submit" class="find-my-home-button bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex items-center gap-2">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 11.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zm0 9.5s7-6.5 7-11.5a7 7 0 10-14 0c0 5 7 11.5 7 11.5z" />
                 </svg>
                 Find My Home
             </button>
-            <button id="back-button" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Back</button>
+            <button id="back-button" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Back</button>
         </form>
     </div>
     <script>
