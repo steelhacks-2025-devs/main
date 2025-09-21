@@ -86,7 +86,7 @@ The distance weight is calculated as:
 
 where $`d_i`$ is the distance in miles to amenity $`i`$.
 
-The final proximity score combines both quantity and proximity: 
+The final proximity score combines both quantity and proximity:
 
 ```math
 \text{proximityScore} = \min(100, \tanh(\frac{\text{proximityWeights}}{30}) \times 35 + \tanh(\frac{\text{count}}{30}) \times 65)
@@ -134,6 +134,16 @@ We plan to expand our dataset and functionality to include:
 - **Real-time market data** to provide up-to-date pricing and availability information
 - **Crime data** to include a safety metric in our composite score
 
-## Thank You!
+## Local Setup
+
+After cloning the repo on to your local device, perform the following:
+
+1. `pip install -r requirements.txt`
+2. `npm install`
+3. `cd backend`
+4. `python app.py`
+5. Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
+
+## Thank You
 
 Special thanks to the organizers and judges at Steelhacks! (and to whoever is reading this!)
