@@ -11,28 +11,71 @@
 <body class="h-screen flex items-center justify-center" style="background: #dd5e89;
   background: -webkit-linear-gradient(to right, #dd5e89, #f7bb97);
   background: linear-gradient(to right, #dd5e89, #f7bb97);">
-    <div class="flex w-full">
+    <div class="flex w-full min-h-[75%] max-h-[75%]">
         <div class="bg-white p-8 rounded shadow-md text-center w-2/5 ml-10 mr-6">
             <div class="title-group mb-8">
                 <h1 class="text-4xl font-bold text-gray-800">Best Places in {{ price_range_chosen }}</h1>
                 <h3 class="text-xl text-gray-600">Here are some great places for you!</h3>
             </div>
             <div class="boxes-container flex items-center justify-center flex-col">
-                <div class="left">
-                    <div class="house-box w-[300px] min-h-[100px] bg-[#efefd7] border-2 border-[#ccc] rounded-xl flex items-center justify-center text-2xl font-bold mb-6">House 1</div>
-                    <div class="house-box w-[300px] min-h-[100px] bg-[#efefd7] border-2 border-[#ccc] rounded-xl flex items-center justify-center text-2xl font-bold mb-6">House 2</div>
-                    <div class="house-box w-[300px] min-h-[100px] bg-[#efefd7] border-2 border-[#ccc] rounded-xl flex items-center justify-center text-2xl font-bold mb-6">House 3</div>
+                <div class="left" style="overflow-y: auto; max-height: 350px;">
                 </div>
             </div>
         </div>
-        <div class="bg-white p-8 rounded shadow-md text-center w-3/5 ml-6 mr-10">
+        <div class="bg-white p-8 rounded shadow-md text-center w-3/5 ml-6 mr-10" id="infoBox">
             <div class="title-group mb-8">
                 <h1 class="text-4xl font-bold text-gray-800">Additional Information</h1>
                 <h3 class="text-xl text-gray-600">Details about the area</h3>
             </div>
             <p>This is some additional information about the selected area.</p>
+            <p id="selectedKey"></p>
         </div>
     </div>
+    <script>
+    fetch("/get_house_data")
+        .then(response => response.json())
+        .then(data => {
+            const boxesContainer = document.querySelector('.boxes-container .left');
+            const propertyAddresses = data.PROPERTYADDRESS;
+            const fairMarketTotals = data.FAIRMARKETTOTAL;
+            const addressKeys = Object.keys(propertyAddresses).slice(0, 10); // Get the first 10 keys
+            const infoBox = document.getElementById('infoBox');
+            const selectedKeyElement = document.getElementById('selectedKey');
+
+            addressKeys.forEach(key => {
+                const address = propertyAddresses[key];
+                const fairMarketTotal = fairMarketTotals[key];
+
+                const houseBox = document.createElement('button');
+                houseBox.classList.add('house-box', 'w-[300px]', 'min-h-[100px]', 'bg-[#efefd7]', 'border-2', 'border-[#ccc]', 'rounded-xl', 'flex', 'flex-col', 'items-center', 'justify-center', 'text-2xl', 'font-bold', 'mb-6', 'hover:bg-gray-200');
+                houseBox.style.cssText = `
+                    border: 2px solid #ccc;
+                    border-radius: 0.75rem;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    margin-bottom: 1.5rem;
+                    width: 300px;
+                    min-height: 100px;
+                    text-align: center;
+                    color: inherit;
+                    padding: 0.5rem 1rem;
+                    cursor: pointer;
+                `;
+                houseBox.innerHTML = `<p>${address}</p><p>Price: $${fairMarketTotal}</p>`;
+                houseBox.id = key;
+
+                houseBox.addEventListener('click', function() {
+                    selectedKeyElement.textContent = `Selected Key: ${key}`;
+                });
+
+                boxesContainer.appendChild(houseBox);
+            });
+        });
+</script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
