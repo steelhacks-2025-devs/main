@@ -3,24 +3,14 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 import pandas as pd
 # from prox import count_amenities_by_distance
-from pca import pca_scoring
+# from pca import pca_scoring
 
 # init flask
 app = Flask(__name__, template_folder='../frontend', static_folder='../frontend/static')
 
 @app.route('/')
 def home():
-    # Get csv file path
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    neighborhoods_csv = os.path.join(BASE_DIR, 'datasets', 'Pittsburgh_Neighborhoods.csv')
-
-    # Read PGH neighborhoods into a DataFrame
-    df = pd.read_csv(neighborhoods_csv)
-
-    # Get all neighborhoods
-    neighborhoods = df['hood']
-
-    return render_template('index.html', neighborhood_options=neighborhoods)
+    return render_template('index.html')
 
 @app.route('/find')
 def find():
@@ -28,27 +18,27 @@ def find():
 
 @app.route('/results', methods=['POST'])
 def results():
-    print(request.form)
-    # Get neighborhood selected by user on index page
-    selected_neighborhood = request.form.get('neighborhood-list')
-    print(selected_neighborhood)
+    # Get price range selected by user on index page
+    price_range = request.form.get('price-range')
 
     # Get csv file path
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    property_csv = os.path.join(BASE_DIR, 'datasets', 'finalpt5.csv')
+    property_csv = os.path.join(BASE_DIR, 'datasets', 'finalpt6.csv')
 
-    # Read PGH property into a DataFrame
+    # Read PGH properties into a DataFrame
     df = pd.read_csv(property_csv)
 
-    print(df['NEIGHDESC'])
-    print(df[df['NEIGHDESC'] == selected_neighborhood.upper()].head())
+    # Price conditionals based on dropdown choice
+    if (price_range == '0-100'):
+        print(df[df['FAIRMARKETTOTAL'] < 100_000]['FAIRMARKETTOTAL'])
+    elif (price_range == '100-250'):
+        print(df[(df['FAIRMARKETTOTAL'] >= 100_000) & (df['FAIRMARKETTOTAL'] < 250_000)]['FAIRMARKETTOTAL'])
+    elif (price_range == '250-500'):
+        print(df[(df['FAIRMARKETTOTAL'] >= 250_000) & (df['FAIRMARKETTOTAL'] < 500_000)]['FAIRMARKETTOTAL'])
+    elif (price_range == '500+'):
+        print(df[df['FAIRMARKETTOTAL'] >= 500_000]['FAIRMARKETTOTAL'])
     
-    # # Example count_amenities_by_distance call
-    # test_row = df[0]
-    # for amenity in ['hospital', 'transportation']:
-    #     print(count_amenities_by_distance(f'{test_row['PROPERTYHOUSENUM']} {test_row['PROPERTYADDRESS']}, Pittsburgh, PA {test_row['PROPERTYZIP']}', amenity, [1, 3, 5]))
-
-    return render_template('results.html', neighborhood=selected_neighborhood)
+    return render_template('results.html', price_range_chosen=price_range)
 
 # Run the Flask server
 if __name__ == '__main__':
