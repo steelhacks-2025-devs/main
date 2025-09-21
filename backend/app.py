@@ -36,30 +36,29 @@ def results():
     # Get criteria selected by user on index page
     min_price = int(request.form.get('min_price'))
     max_price = int(request.form.get('max_price'))
-    stories = request.form.get('stories')
+    stories = request.form.get('floors')
     bedrooms = request.form.get('bedrooms')
     condition = request.form.get('condition')
 
     # Get csv file path
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    property_csv = os.path.join(BASE_DIR, 'datasets', 'finalpt6.csv')
+    property_csv = os.path.join(BASE_DIR, 'datasets', 'final_dataset.csv')
 
     # Read PGH properties into a DataFrame
     df = pd.read_csv(property_csv)
 
-    # Get csv file paths
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # Get output json file path
     output_file = os.path.join(BASE_DIR, 'datasets', 'found.json')
 
     # Get data within price range
     df = df[(df['FAIRMARKETTOTAL'] >= min_price) & (df['FAIRMARKETTOTAL'] < max_price)]
 
-    # If user requested specific stories, match it
-    if stories and stories != 'No preference':
+    # If user requested specific number of stories, match it
+    if stories:
         df = df[df['STORIES'] == int(stories)]
 
     # If user requested specific number of bedrooms match it
-    if bedrooms and bedrooms != 'No preference':
+    if bedrooms:
         if bedrooms == '10+':
             df = df[df['BEDROOMS'] >= 10]
         elif bedrooms == '7-9':
@@ -70,9 +69,13 @@ def results():
             df = df[df['BEDROOMS'] == int(bedrooms)]
 
     # If user requested specific condition, match it
-    if condition and condition != 'No preference':
+    if condition:
         df = df[df['CONDITIONDESC'] == condition]
-    
+
+    # Sort DataFrame by livability_score
+    df.sort_values(by='livability_score', ascending=False)
+    df = df.head(10)
+
     # Convert final DataFrame to a json file
     df.to_json(output_file)
     

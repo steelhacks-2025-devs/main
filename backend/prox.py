@@ -43,11 +43,10 @@ def count_amenities_by_distance(zip_lat, zip_lon, amenity_type, distance_ranges)
         print("Error querying Overpass API for coordinate: {zip_lat}, {zip_lon}: {response.status_code}")
         return None
     
+    # Parse the response
     data = response.json()
-    
     # Calculate distances and count by ranges
     amenities_with_distances = []
-    
     for element in data['elements']:
         # Get coordinates (different for nodes vs ways/relations)
         if element['type'] == 'node':
@@ -63,6 +62,7 @@ def count_amenities_by_distance(zip_lat, zip_lon, amenity_type, distance_ranges)
             (lat, lon)
         ).miles
         
+        # Get the name of the amenity
         name = element.get('tags', {}).get('name', 'Unnamed')
         if name == 'Unnamed':
             continue
@@ -95,23 +95,28 @@ def count_amenities_by_distance(zip_lat, zip_lon, amenity_type, distance_ranges)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_file = os.path.join(BASE_DIR, 'datasets', 'finalpt6.csv')
 df = pd.read_csv(csv_file)
-# Extract LAT and LON tuples from the dataframe
+
+# Extract latitude and longitude tuples from the dataframe
 coordinates = list(set(zip(df['LAT'], df['LON'])))
-print(len(coordinates))
 print(f"testing {len(coordinates)} zipcode centroids...")
 
+# Define the amenity types
+# We chose to focus on medical, grocery, recreation, and entertainment amenities
+# More amenity types are important, but the dataset had the most data for these four types:
 amenity_types = {
     "medical": "hospital|clinic|pharmacy|emergency care|health center|urgent care|physical therapy",
-    "transportation": "bus station|pittsburgh regional transit|transit station|train station|subway station|metro station|errand service|taxi|bus stop",
+    # "transportation": "bus station|pittsburgh regional transit|transit station|train station|subway station|metro station|errand service|taxi|bus stop",
     "grocery": "grocery store|supermarket|market|drugstore",
     "recreation": "park|rec center|community center|pool|gym|fitness center",
     "entertainment": "movie theater|theater|concert hall|museum|art gallery|zoo|aquarium|library|bookstore|record store|music venue|comedy club|sports venue|arena",
 }
 
+print("Starting proximity scoring...")
+start_time = time.time()
+
 final_data = []
 
 for i, coordinate in enumerate(coordinates):
-
     final_data.append({})
     lat, lon = coordinate
     final_data[i]["LAT"] = lat
@@ -132,9 +137,16 @@ for i, coordinate in enumerate(coordinates):
             proximity_weights = sum(1 / (1 + amenity['distance_miles']) for amenity in detailed_list)
             
             # Use tanh for natural diminishing returns and cap at 100
-            count_factor = math.tanh(len(detailed_list) / 20) * 50  # Scales count influence
-            proximity_factor = math.tanh(proximity_weights / 20) * 50  # Scales proximity influence
+            # approx 2/3 of the score is based on the count of amenities
+            # approx 1/3 of the score is based on the proximity of the amenities
+            count_factor = math.tanh(len(detailed_list) / 30) * 65  # Scales count influence
+
+            # tanh provides natural diminishing returns - as proximity_weights increases,
+            # the rate of score increase slows down, preventing a few very close amenities
+            # from dominating the score and ensuring balanced weighting across all factors
+            proximity_factor = math.tanh(proximity_weights / 30) * 35  # Scales proximity influence
             
+            # Combine the two factors and make sure the score is not greater than 100
             proximity_index = min(100, proximity_factor + count_factor)
         
         print(f"{category.capitalize()} total found: {res['total_found']}")
@@ -144,5 +156,9 @@ for i, coordinate in enumerate(coordinates):
         print(f"{category.capitalize()} proximity index: {proximity_index}")
         final_data[i][f"{category}_prox_score"] = proximity_index
     
+# Save the final data to a CSV file
 df = pd.DataFrame(final_data)
 df.to_csv(os.path.join(BASE_DIR, 'datasets', 'zipcode_centroid_proximity_scores.csv'), index=False)
+end_time = time.time()
+print("Done!")
+print(f"Time taken: {end_time - start_time} seconds")
