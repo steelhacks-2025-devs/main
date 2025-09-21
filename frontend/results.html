@@ -22,12 +22,13 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white p-8 rounded shadow-md text-center w-3/5 ml-6 mr-10" id="infoBox">
+        <div class="bg-white p-8 rounded shadow-md w-3/5 ml-6 mr-10 text-center" id="infoBox">
             <div class="title-group mb-8">
-                <h1 class="text-4xl font-bold text-gray-800">Additional Information</h1>
+                <h1 class="text-4xl font-bold text-gray-800">Additional Information About The<br>Area You Chose</h1>
                 <h3 class="text-xl text-gray-600">Details about the area</h3>
             </div>
-            <p>This is some additional information about the selected area.</p>
+            <h3 class="text-2xl font-bold" style="margin-right: calc(250/400*100%); margin-top: -2%;">Property Data:</h3>
+            <iframe id="mapIframe" width="425" height="325" style="border: 2px solid rgb(0,0,0); margin-top: -1%; margin-left: calc(180/400*100%);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <p id="selectedKey"></p>
         </div>
     </div>
@@ -41,6 +42,7 @@
             const addressKeys = Object.keys(propertyAddresses).slice(0, 10); // Get the first 10 keys
             const infoBox = document.getElementById('infoBox');
             const selectedKeyElement = document.getElementById('selectedKey');
+            const mapIframe = document.getElementById('mapIframe');
 
             addressKeys.forEach(key => {
                 const address = propertyAddresses[key];
@@ -69,7 +71,9 @@
                 houseBox.id = key;
 
                 houseBox.addEventListener('click', function() {
-                    selectedKeyElement.textContent = `Selected Key: ${key}`;
+                    //selectedKeyElement.textContent = `Selected Key: ${key}`;
+                    const mapUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3030.891878849978!2d-75.3139787!3d39.7929925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6d9d57043c99f%3A0x4694698992989f6a!2s${encodeURIComponent(address + ", Pittsburgh, PA")}!5e0!3m2!1sen!2sus!4v1727009769297!5m2!1sen!2sus`;
+                    mapIframe.src = mapUrl;
                 });
 
                 boxesContainer.appendChild(houseBox);
