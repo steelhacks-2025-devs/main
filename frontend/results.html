@@ -75,15 +75,6 @@
                 const infoBox = document.getElementById('infoBox');
                 const selectedKeyElement = document.getElementById('selectedKey');
                 const mapIframe = document.getElementById('mapIframe');
-
-                addressKeys.sort((a,b) => livabilityScores[b] - livabilityScores[a]); // Sort keys by livability score
-                const propertyAddresses = data.PROPERTYADDRESS;
-                const fairMarketTotals = data.FAIRMARKETTOTAL;
-                const livabilityScores = data.livability_score;
-                const addressKeys = Object.keys(propertyAddresses);
-                const infoBox = document.getElementById('infoBox');
-                const selectedKeyElement = document.getElementById('selectedKey');
-                const mapIframe = document.getElementById('mapIframe');
                 const addressInfoElement = document.getElementById('addressInfo');
                 const priceInfoElement = document.getElementById('priceInfo');
                 const livabilityInfoElement = document.getElementById('livabilityInfo');
@@ -96,6 +87,8 @@
                 const halfBaths = data.HALFBATHS;
                 const conditionDescs = data.CONDITIONDESC;
                 const stories = data.STORIES;
+
+                addressKeys.sort((a,b) => livabilityScores[b] - livabilityScores[a]); // Sort keys by livability score
 
                 addressKeys.sort((a, b) => livabilityScores[b] - livabilityScores[a]);
 
