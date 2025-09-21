@@ -6,6 +6,112 @@
     <title>Find Your Dream Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ url_for('static', filename='css/tailwind.css') }}" rel="stylesheet">
+    <style>
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            margin: 7.5px 0;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 5px;
+            cursor: pointer;
+            animate: 0.2s;
+            box-shadow: 0px 0px 0px #000000;
+            background: #3071a9;
+            border-radius: 1.3px;
+            border: 0.2px solid #010101;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            border: 1px solid #000000;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -7.5px;
+        }
+
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #367ebd;
+        }
+
+        input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 5px;
+            cursor: pointer;
+            animate: 0.2s;
+            box-shadow: 0px 0px 0px #000000;
+            background: #3071a9;
+            border-radius: 1.3px;
+            border: 0.2px solid #010101;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            border: 1px solid #000000;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        input[type=range]::-ms-track {
+            width: 100%;
+            height: 5px;
+            cursor: pointer;
+            animate: 0.2s;
+            background: transparent;
+            border-color: transparent;
+            color: transparent;
+        }
+
+        input[type=range]::-ms-fill-lower {
+            background: #3071a9;
+            border: 0.2px solid #010101;
+            border-radius: 2.6px;
+            box-shadow: 0px 0px 0px #000000;
+        }
+
+        input[type=range]::-ms-fill-upper {
+            background: #3071a9;
+            border: 0.2px solid #010101;
+            border-radius: 2.6px;
+            box-shadow: 0px 0px 0px #000000;
+        }
+
+        input[type=range]::-ms-thumb {
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            border: 1px solid #000000;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        input[type=range]:focus::-ms-fill-lower {
+            background: #3071a9;
+        }
+
+        input[type=range]:focus::-ms-fill-upper {
+            background: #367ebd;
+        }
+
+        .find-my-home-button.disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 
 <body class="h-screen flex items-center justify-center" style="background: #dd5e89; /* fallback for old browsers */
@@ -16,40 +122,89 @@
             <h1 class="text-4xl font-bold text-gray-800">Tell Us What You Are Looking For</h1>
             <h3 class="text-xl text-gray-600">Find your dream home today!</h3>
         </div>
-        <div class="controls-group flex flex-col items-center space-y-4">
+        <form action="/results" class="controls-group flex flex-col items-center space-y-4">
             <div class="w-full">
-                <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Price Of Housing:</label>
-                <select id="price" name="price" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    <option value="">Option 1</option>
-                    <option value="">Option 2</option>
-                    <option value="">Option 3</option>
+                <label for="min-price" class="block text-gray-700 text-sm font-bold mb-2">Min Price:</label>
+                <input type="range" id="min-price" name="min_price" min="0" max="3000000" value="0" class="w-full">
+                <p class="text-gray-600 text-xs italic">Value: $<span id="min-price-value">0</span></p>
+            </div>
+            <div class="w-full">
+                <label for="max-price" class="block text-gray-700 text-sm font-bold mb-2">Max Price:</label>
+                <input type="range" id="max-price" name="max_price" min="0" max="3000000" value="3000000" class="w-full">
+                <p class="text-gray-600 text-xs italic">Value: $<span id="max-price-value">3000000</span></p>
+            </div>
+            <div class="w-full">
+                <label for="bedrooms" class="block text-gray-700 text-sm font-bold mb-2">Bedrooms:</label>
+                <select id="bedrooms" name="bedrooms" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                    <option value="">4</option>
+                    <option value="">5-6</option>
+                    <option value="">7-9</option>
+                    <option value="">10+</option>
                 </select>
             </div>
             <div class="w-full">
-                <label for="walkability" class="block text-gray-700 text-sm font-bold mb-2">Walkability:</label>
-                <select id="walkability" name="walkability" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    <option value="">Option 1</option>
-                    <option value="">Option 2</option>
-                    <option value="">Option 3</option>
+                <label for="condition" class="block text-gray-700 text-sm font-bold mb-2">Condition:</label>
+                <select id="condition" name="condition" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="">Excellent</option>
+                    <option value="">Very Good</option>
+                    <option value="">Good</option>
+                    <option value="">Average</option>
+                    <option value="">Fair</option>
+                    <option value="">Poor</option>
+                    <option value="">Very Poor</option>
+                    <option value="">Unsound</option>
                 </select>
             </div>
             <div class="w-full">
-                <label for="outdoor" class="block text-gray-700 text-sm font-bold mb-2">Outdoor Opportunities:</label>
-                <select id="outdoor" name="outdoor" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    <option value="">Option 1</option>
-                    <option value="">Option 2</option>
-                    <option value="">Option 3</option>
+                <label for="floors" class="block text-gray-700 text-sm font-bold mb-2">Floors:</label>
+                <select id="floors" name="floors" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                    <option value="">4</option>
                 </select>
             </div>
-            <button id="find-my-home-button-2" type="button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex items-center gap-2">
-                <svg class ="w-5 h-5" fill = "none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap = "round" stroke-linejoin = "round" d="M12 11.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zm0 9.5s7-6.5 7-11.5a7 7 0 10-14 0c0 5 7 11.5 7 11.5z" />
+            <button id="find-my-home-button-2" type="button" class="find-my-home-button bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 11.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zm0 9.5s7-6.5 7-11.5a7 7 0 10-14 0c0 5 7 11.5 7 11.5z" />
                 </svg>
                 Find My Home
             </button>
-            <button id="back-button" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Back</button>
-        </div>
-    </div>   
+            <button id="back-button" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Back</button>
+        </form>
+    </div>
+    <script>
+        const minPriceInput = document.getElementById('min-price');
+        const maxPriceInput = document.getElementById('max-price');
+        const minPriceValue = document.getElementById('min-price-value');
+        const maxPriceValue = document.getElementById('max-price-value');
+        const findMyHomeButton = document.getElementById('find-my-home-button-2');
+
+        function updateButtonState() {
+            const minPrice = parseInt(minPriceInput.value);
+            const maxPrice = parseInt(maxPriceInput.value);
+
+            minPriceValue.textContent = minPrice.toLocaleString('en-US');
+            maxPriceValue.textContent = maxPrice.toLocaleString('en-US');
+
+            if (minPrice > maxPrice) {
+                findMyHomeButton.classList.add('disabled');
+                findMyHomeButton.disabled = true;
+            } else {
+                findMyHomeButton.classList.remove('disabled');
+                findMyHomeButton.disabled = false;
+            }
+        }
+
+        minPriceInput.addEventListener('input', updateButtonState);
+        maxPriceInput.addEventListener('input', updateButtonState);
+
+        updateButtonState();
+    </script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
+
 </html>
