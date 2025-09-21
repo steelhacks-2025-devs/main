@@ -102,11 +102,14 @@ print(f"testing {len(coordinates)} zipcode centroids...")
 
 amenity_types = {
     "medical": "hospital|clinic|pharmacy|emergency care|health center|urgent care|physical therapy",
-    "transportation": "bus station|pittsburgh regional transit|transit station|train station|subway station|metro station|errand service|taxi|bus stop",
+    # "transportation": "bus station|pittsburgh regional transit|transit station|train station|subway station|metro station|errand service|taxi|bus stop",
     "grocery": "grocery store|supermarket|market|drugstore",
     "recreation": "park|rec center|community center|pool|gym|fitness center",
     "entertainment": "movie theater|theater|concert hall|museum|art gallery|zoo|aquarium|library|bookstore|record store|music venue|comedy club|sports venue|arena",
 }
+
+print("Starting proximity scoring...")
+start_time = time.time()
 
 final_data = []
 
@@ -132,8 +135,8 @@ for i, coordinate in enumerate(coordinates):
             proximity_weights = sum(1 / (1 + amenity['distance_miles']) for amenity in detailed_list)
             
             # Use tanh for natural diminishing returns and cap at 100
-            count_factor = math.tanh(len(detailed_list) / 20) * 50  # Scales count influence
-            proximity_factor = math.tanh(proximity_weights / 20) * 50  # Scales proximity influence
+            count_factor = math.tanh(len(detailed_list) / 30) * 65  # Scales count influence
+            proximity_factor = math.tanh(proximity_weights / 30) * 35  # Scales proximity influence
             
             proximity_index = min(100, proximity_factor + count_factor)
         
@@ -146,3 +149,6 @@ for i, coordinate in enumerate(coordinates):
     
 df = pd.DataFrame(final_data)
 df.to_csv(os.path.join(BASE_DIR, 'datasets', 'zipcode_centroid_proximity_scores.csv'), index=False)
+end_time = time.time()
+print("Done!")
+print(f"Time taken: {end_time - start_time} seconds")

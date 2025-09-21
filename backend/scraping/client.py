@@ -4,8 +4,8 @@ import aiohttp
 from typing import Optional
 # from config import load_config
 
-class WPRDC_Client:
-    BASE_URL = "https://tools.wprdc.org/property-api/v0/parcels/"
+class WalkScore_Client:
+    BASE_URL = "https://api.walkscore.com/score"
     """
     Base client for sending requests to the API.
     """
@@ -35,7 +35,7 @@ class WPRDC_Client:
             await self._session.close()
             self._session = None
     
-    async def _make_request(self, path: str) -> dict:
+    async def _make_request(self, path: str, params:dict) -> dict:
         """Make a request to the API"""
         endpoint_path_url = f"{self.BASE_URL}{path}"
         async with self.semaphore:
@@ -43,7 +43,7 @@ class WPRDC_Client:
                 endpoint_path_url,
                 # cookies=self.cookies,
                 # headers=self.headers,
-                # params=params
+                params=params
             ) as resp:
                 print(f"Querying URL: {resp.url}")
                 try:
