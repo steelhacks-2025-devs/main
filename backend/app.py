@@ -1,5 +1,6 @@
 # Import necessary modules from Flask
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+import json
 import os
 import pandas as pd
 # from prox import count_amenities_by_distance
@@ -15,6 +16,20 @@ def home():
 @app.route('/find')
 def find():
     return render_template('find.html')
+
+@app.route('/get_house_data')
+def get_house_data():
+    # Get csv file path
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    output_file = os.path.join(BASE_DIR, 'datasets', 'found.json')
+
+    try:
+        with open(output_file, 'r') as f:
+            data = json.load(f)
+        print(jsonify(data))
+        return jsonify(data)
+    except FileNotFoundError:
+        return jsonify({"error": "Data not found"}), 404
 
 @app.route('/results', methods=['POST'])
 def results():
