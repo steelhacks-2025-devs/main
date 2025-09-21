@@ -24,6 +24,7 @@ def home():
 
 @app.route('/find')
 def find():
+    
     return render_template('find.html')
 
 @app.route('/results')
