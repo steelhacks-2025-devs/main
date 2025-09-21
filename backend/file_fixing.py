@@ -4,17 +4,20 @@ import os
 
 # Get csv file paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-csv_files = [os.path.join(BASE_DIR, 'datasets', f'property-assessments-{i}.csv') for i in range(1, 5)]
+# csv_files = [os.path.join(BASE_DIR, 'datasets', f'property-assessments-{i}.csv') for i in range(1, 5)]
+csv_file = os.path.join(BASE_DIR, 'datasets', 'finalpt3.csv')
+# Load the CSV file into a pandas DataFrame
+print(f"Loading CSV file: {csv_file}")
+global df
+df = pd.read_csv(csv_file)
 
-df1 = pd.read_csv(csv_files[0])
-df2 = pd.read_csv(csv_files[1])
-df3 = pd.read_csv(csv_files[2])
-df4 = pd.read_csv(csv_files[3])
+print(f"Original shape: {df.shape}")
 
-result = pd.concat([df1, df2, df3, df4], ignore_index=True)
+def fix():
+    df.drop(columns=['CLASS', 'CLASSDESC', 'SALEPRICE', 'COUNTYTOTAL', 'LOCALTOTAL', 'GRADE', 'GRADEDESC'], inplace=True)
 
-# Get csv file path
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-output_csv = os.path.join(BASE_DIR, 'datasets', 'property-assessments-combined.csv')
+fix()
 
-result.to_csv(output_csv)
+print(f"New shape: {df.shape}")
+
+df.to_csv(os.path.join(BASE_DIR, 'datasets', 'finalpt4.csv'), index=False)
