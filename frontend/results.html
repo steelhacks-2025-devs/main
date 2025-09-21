@@ -6,6 +6,24 @@
     <title>Best Places</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ url_for('static', filename='css/tailwind.css') }}" rel="stylesheet">
+    <style>
+        #propertyDataContainer {
+            position: relative;
+        }
+
+        #mapIframe {
+            position: absolute;
+            top: 30px;
+            left: 340px;
+            width: 425px;
+            height: 325px;
+            border: 2px solid rgb(0, 0, 0);
+        }
+
+        #propertyInfo {
+            text-align: left;
+        }
+    </style>
 </head>
 
 <body class="h-screen flex items-center justify-center" style="background: #dd5e89;
@@ -27,10 +45,19 @@
                 <h1 class="text-4xl font-bold text-gray-800">Additional Information About The<br>Area You Chose</h1>
                 <h3 class="text-xl text-gray-600">Details about the area.</h3>
             </div>
-            <div>
+            <div id="propertyDataContainer">
                 <h3 class="text-2xl font-bold" style="margin-right: calc(250/400*100%); margin-top: -2%;">Property Data:</h3>
+                <div id="propertyInfo" style="margin-left: 16px; margin-top: 20px; font-size: 1.3em;">
+                    <p id="addressInfo"></p>
+                    <p id="priceInfo"></p>
+                    <p id="livabilityInfo"></p>
+                    <p id="bedroomInfo"></p>
+                    <p id="bathroomInfo"></p>
+                    <p id="storiesInfo"></p>
+                    <p id="conditionInfo"></p>
+                </div>
+                <iframe id="mapIframe" src="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            <iframe id="mapIframe" width="425" height="325" style="border: 2px solid rgb(0,0,0); margin-top: -1%; margin-left: calc(180/400*100%);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <p id="selectedKey"></p>
         </div>
     </div>
@@ -42,17 +69,34 @@
             const propertyAddresses = data.PROPERTYADDRESS;
             const fairMarketTotals = data.FAIRMARKETTOTAL;
             const livabilityScores = data.livability_score;
-            const addressKeys = Object.keys(propertyAddresses); // Get all the keys (only 10 left from Python)
+            const addressKeys = Object.keys(propertyAddresses);
             const infoBox = document.getElementById('infoBox');
             const selectedKeyElement = document.getElementById('selectedKey');
             const mapIframe = document.getElementById('mapIframe');
+            const addressInfoElement = document.getElementById('addressInfo');
+            const priceInfoElement = document.getElementById('priceInfo');
+            const livabilityInfoElement = document.getElementById('livabilityInfo');
+            const bedroomInfoElement = document.getElementById('bedroomInfo');
+            const bathroomInfoElement = document.getElementById('bathroomInfo');
+            const conditionInfoElement = document.getElementById('conditionInfo');
+            const storiesInfoElement = document.getElementById('storiesInfo');
+            const bedrooms = data.BEDROOMS;
+            const fullBaths = data.FULLBATHS;
+            const halfBaths = data.HALFBATHS;
+            const conditionDescs = data.CONDITIONDESC;
+            const stories = data.STORIES;
 
-            addressKeys.sort((a,b) => livabilityScores[b] - livabilityScores[a]); // Sort keys by livability score
+            addressKeys.sort((a, b) => livabilityScores[b] - livabilityScores[a]);
 
             addressKeys.forEach(key => {
                 const address = propertyAddresses[key];
                 const fairMarketTotal = fairMarketTotals[key];
                 const livabilityScore = livabilityScores[key];
+                const bedroomCount = bedrooms[key];
+                const fullBathCount = fullBaths[key];
+                const halfBathCount = halfBaths[key];
+                const conditionDesc = conditionDescs[key];
+                const storyCount = stories[key];
 
                 const houseBox = document.createElement('button');
                 houseBox.classList.add('house-box', 'w-[300px]', 'min-h-[100px]', 'bg-[#efefd7]', 'border-2', 'border-[#ccc]', 'rounded-xl', 'flex', 'flex-col', 'items-center', 'justify-center', 'text-2xl', 'font-bold', 'mb-6', 'hover:bg-gray-200');
@@ -66,7 +110,7 @@
                     font-size: 1.5rem;
                     font-weight: bold;
                     margin-bottom: 1.5rem;
-                    width: 300px;
+                    width: 320px;
                     min-height: 100px;
                     text-align: center;
                     color: inherit;
@@ -77,9 +121,16 @@
                 houseBox.id = key;
 
                 houseBox.addEventListener('click', function() {
-                    //selectedKeyElement.textContent = `Selected Key: ${key}`;
                     const mapUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3030.891878849978!2d-75.3139787!3d39.7929925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6d9d57043c99f%3A0x4694698992989f6a!2s${encodeURIComponent(address + ", Pittsburgh, PA")}!5e0!3m2!1sen!2sus!4v1727009769297!5m2!1sen!2sus`;
                     mapIframe.src = mapUrl;
+
+                    addressInfoElement.textContent = `Address: ${address}`;
+                    priceInfoElement.textContent = `Price: $${fairMarketTotal}`;
+                    livabilityInfoElement.textContent = `Livability Score: ${livabilityScore.toFixed(1)}`;
+                    bedroomInfoElement.textContent = `Bedrooms: ${bedroomCount}`;
+                    bathroomInfoElement.textContent = `Bathrooms: ${fullBathCount + halfBathCount}`;
+                    conditionInfoElement.textContent = `Condition: ${conditionDesc}`;
+                    storiesInfoElement.textContent = `Stories: ${storyCount}`;
                 });
 
                 boxesContainer.appendChild(houseBox);
