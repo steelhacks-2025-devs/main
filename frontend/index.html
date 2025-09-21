@@ -28,8 +28,8 @@
                 Find your perfect home in the Steel City today!
             </p>
         </div>
-        <div class="controls-group flex items-center justify-center">
-            <form action="/results" method="post">
+        <div>
+            <form action="/results" method="post" class="controls-group flex items-center justify-center">
                 <select id="neighborhood-list" name="neighborhood-list" class="px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 mr-4">
                     <option value="">Pick Your Neighborhood</option>
                     {% for neighborhood in neighborhood_options %}
