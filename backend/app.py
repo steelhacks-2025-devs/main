@@ -42,7 +42,7 @@ def results():
 
     # Get csv file path
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    property_csv = os.path.join(BASE_DIR, 'datasets', 'finalpt7.csv')
+    property_csv = os.path.join(BASE_DIR, 'datasets', 'final_dataset.csv')
 
     # Read PGH properties into a DataFrame
     df = pd.read_csv(property_csv)
@@ -71,7 +71,11 @@ def results():
     # If user requested specific condition, match it
     if condition:
         df = df[df['CONDITIONDESC'] == condition]
-    
+
+    # Sort DataFrame by livability_score
+    df.sort_values(by='livability_score', ascending=False)
+    df = df.head(10)
+
     # Convert final DataFrame to a json file
     df.to_json(output_file)
     
