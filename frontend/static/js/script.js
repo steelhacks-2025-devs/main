@@ -6,6 +6,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const backButton = document.getElementById('back-button');
     const neighborhoodList = document.getElementById('neighborhood-list'); // Define it here
 
+    function updateButtonState() {
+        if (neighborhoodList && neighborhoodList.value === '') {
+            findMyHomeButton.classList.add('opacity-50', 'cursor-not-allowed');
+            findMyHomeButton.classList.remove('hover:bg-green-700', 'cursor-pointer');
+            findMyHomeButton.disabled = true;
+        } else {
+            findMyHomeButton.classList.remove('opacity-50', 'cursor-not-allowed');
+            findMyHomeButton.classList.add('hover:bg-green-700', 'cursor-pointer');
+            findMyHomeButton.disabled = false;
+        }
+    }
+
     if (pickForMeButton) {
         pickForMeButton.addEventListener('click', function() {
             window.location.href = "/find";
@@ -44,5 +56,9 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = "/";
         });
     }
-});
 
+    if (neighborhoodList) {
+        neighborhoodList.addEventListener('change', updateButtonState);
+        updateButtonState();
+    }
+});
