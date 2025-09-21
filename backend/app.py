@@ -24,16 +24,6 @@ def home():
 
 @app.route('/find')
 def find():
-    # Get csv file path
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    property_csv = os.path.join(BASE_DIR, 'datasets', 'finalpt5.csv')
-
-    # Read PGH property into a DataFrame
-    df = pd.read_csv(property_csv)
-
-    neighborhood = request.form.get('neighborhood-list')
-    print(pca_scoring(df[df['NEIGHBORHOOD'] == neighborhood]))
-    
     return render_template('find.html')
 
 @app.route('/results', methods=['POST'])
