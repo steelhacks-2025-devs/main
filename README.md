@@ -10,7 +10,14 @@ We used open source datasets and Python's data science and ML libraries to creat
 
 ## The Team
 
-Our team consisted of [Bhavana](https://github.com/bhavana-pixel), [Danny](https://github.com/dannylawler), [Joe](https://github.com/joe-magg), and [Shane](https://github.com/shane-thoma). Bhavana and Danny were the main frontend developers for the project, and Joe and Shane were the main backend developers.
+Our team members:
+
+- [Bhavana Dakshinamoorthy](https://github.com/bhavana-pixel) (bd00040@mix.wvu.edu)
+- [Danny Lawler](https://github.com/dannylawler) (del00010@mix.wvu.edu)
+- [Joseph Maggio](https://github.com/joe-magg) (jdm00057@mix.wvu.edu)
+- [Shane Thoma](https://github.com/shane-thoma) (smt00016@mix.wvu.edu).
+
+Bhavana and Danny were the main frontend developers for the project, and Joe and Shane were the main backend developers.
 
 ## How it Works
 
